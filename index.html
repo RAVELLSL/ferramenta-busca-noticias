@@ -11,7 +11,7 @@
       --bg-light: #f4f7f9;
       --text-light: #222;
       --bg-dark: #121620;
-      --text-dark: #e1e1e1;
+      --text-dark: #ffffff; /* Textos em modo escuro agora brancos */
       --card-bg-light: #fff;
       --card-bg-dark: #1e2230;
     }
@@ -21,7 +21,8 @@
       background: var(--bg-light);
       color: var(--text-light);
       min-height: 100vh;
-      display: flex; flex-direction: column;
+      display: flex;
+      flex-direction: column;
       transition: background .3s, color .3s;
     }
     body.dark-mode {
@@ -34,20 +35,29 @@
       background: var(--primary);
       color: #fff;
       padding: 1rem 2rem;
-      display: flex; align-items: center; justify-content: space-between;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     }
     header h1 { font-size: 1.75rem; }
     .theme-toggle {
-      border: 2px solid #fff; background: none; color: #fff;
-      padding: .5rem 1rem; border-radius: 4px; cursor: pointer;
+      border: 2px solid #fff;
+      background: none;
+      color: #fff;
+      padding: .5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
       transition: background .3s, color .3s;
     }
     .theme-toggle:hover {
-      background: #fff; color: var(--primary);
+      background: #fff;
+      color: var(--primary);
     }
     .search-container {
-      display: flex; justify-content: center; padding: 2rem;
+      display: flex;
+      justify-content: center;
+      padding: 2rem;
     }
     .search-container button {
       padding: .75rem 2rem;
@@ -60,7 +70,8 @@
       transition: background .3s;
     }
     .search-container button:hover {
-      background: var(--primary); color: #fff;
+      background: var(--primary);
+      color: #fff;
     }
     .articles-grid {
       display: grid;
@@ -73,7 +84,8 @@
       border-radius: 8px;
       overflow: hidden;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      display: flex; flex-direction: column;
+      display: flex;
+      flex-direction: column;
       transition: transform .3s, box-shadow .3s;
     }
     body.dark-mode .card {
@@ -85,44 +97,70 @@
       box-shadow: 0 4px 16px rgba(0,0,0,0.2);
     }
     .card img {
-      width: 100%; height: 160px; object-fit: cover;
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
     }
     .card-content {
       padding: 1rem;
-      display: flex; flex-direction: column; flex: 1;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      color: inherit; /* Herda cor branca em dark-mode */
     }
     .card-content small {
-      font-size: .75rem; color: #666; margin-bottom: .5rem;
+      font-size: .75rem;
+      margin-bottom: .5rem;
     }
-    body.dark-mode .card-content small { color: #aaa; }
+    body.dark-mode .card-content small { color: #ccc; }
     .card-content h3 {
-      font-size: 1.1rem; margin-bottom: .5rem;
+      font-size: 1.1rem;
+      margin-bottom: .5rem;
     }
     .card-content p {
-      font-size: .9rem; line-height: 1.4; flex: 1; margin-bottom: .75rem;
+      font-size: .9rem;
+      line-height: 1.4;
+      flex: 1;
+      margin-bottom: .75rem;
     }
     .card-content a {
-      align-self: flex-end; font-weight: bold;
+      align-self: flex-end;
+      font-size: 1.1rem;
+      padding: .25rem .5rem;
+      font-weight: bold;
     }
     .spinner {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       background: rgba(0,0,0,0.4);
-      display: flex; align-items: center; justify-content: center;
-      visibility: hidden; opacity: 0; transition: opacity .3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity .3s;
       z-index: 1000;
     }
     .spinner.visible {
-      visibility: visible; opacity: 1;
+      visibility: visible;
+      opacity: 1;
     }
     .spinner div {
       border: 6px solid #f3f3f3;
       border-top: 6px solid var(--accent);
-      border-radius: 50%; width: 50px; height: 50px;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
       animation: spin 1s linear infinite;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
     .load-more-container {
-      display: flex; justify-content: center; padding: 1rem;
+      display: flex;
+      justify-content: center;
+      padding: 1rem;
     }
     .load-more-btn {
       padding: .75rem 2rem;
@@ -135,7 +173,8 @@
       transition: background .3s;
     }
     .load-more-btn:hover {
-      background: var(--primary); color: #fff;
+      background: var(--primary);
+      color: #fff;
     }
     @media (max-width: 600px) {
       header { flex-direction: column; gap: 1rem; }
@@ -143,51 +182,61 @@
       .search-container { padding: 1rem; }
       .search-container button { width: 100%; font-size: 1rem; }
       .articles-grid {
-        padding: 0 1rem; grid-template-columns: 1fr;
+        padding: 0 1rem;
+        grid-template-columns: 1fr;
       }
       .card img { height: auto; }
       .load-more-container { padding: .5rem; }
     }
   </style>
 </head>
-<body>
+<body class="dark-mode">
   <div class="spinner" id="spinner"><div></div></div>
   <header>
     <h1>Tech News Hub</h1>
-    <button class="theme-toggle" id="themeToggle">Modo Escuro</button>
+    <button class="theme-toggle" id="themeToggle">Modo Claro</button>
   </header>
+
   <div class="search-container">
     <button id="btnSearch">Pesquisar Notícias</button>
   </div>
+
   <section id="articles" class="articles-grid"></section>
+
   <div class="load-more-container" id="loadMoreContainer" style="display:none">
     <button class="load-more-btn" id="btnLoadMore">Continuar Pesquisa</button>
   </div>
 
   <script>
-    const API_KEY = '9dca067c44c3421e88ff56dc4507af51';
-    const BASE = 'https://newsapi.org/v2';
-    const PROXY = 'https://api.allorigins.win/raw?url=';
-    const spinner = document.getElementById('spinner');
-    const btnSearch = document.getElementById('btnSearch');
-    const btnLoadMore = document.getElementById('btnLoadMore');
+    const API_KEY        = '9dca067c44c3421e88ff56dc4507af51';
+    const BASE           = 'https://newsapi.org/v2';
+    const PROXY          = 'https://api.allorigins.win/raw?url=';
+    const PAGE_SIZE      = 50;
+    const MAX_FETCHABLE  = 100;
+    const TECHNOLOGY_DOMAINS = [
+      'canaltech.com.br','tecmundo.com.br','olhardigital.com.br',
+      'techtudo.com.br','tecnoblog.com','pti.org.br',
+      'gizmodo.uol.com.br','inovacaotecnologica.digital',
+      'technologyreview.com.br','cnnbrasil.com.br','startse.com',
+      'startupi.com.br','optclean.com','meiobit.com',
+      'infomoney.com.br','exame.com','uol.com.br','g1.globo.com'
+    ].join(',');
+
+    const spinner           = document.getElementById('spinner');
+    const btnSearch         = document.getElementById('btnSearch');
+    const btnLoadMore       = document.getElementById('btnLoadMore');
     const loadMoreContainer = document.getElementById('loadMoreContainer');
-    const container = document.getElementById('articles');
-    const themeToggle = document.getElementById('themeToggle');
+    const container         = document.getElementById('articles');
+    const themeToggle       = document.getElementById('themeToggle');
 
-    let page = 1;
-    const pageSize = 50;
-    let seenUrls = new Set();
+    let page      = 1;
+    const seenUrls = new Set();
 
-    // tema claro/escuro
     themeToggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
-      themeToggle.textContent = document.body.classList.contains('dark-mode')
-        ? 'Modo Claro'
-        : 'Modo Escuro';
+      const isDark = document.body.classList.toggle('dark-mode');
+      themeToggle.textContent = isDark ? 'Modo Claro' : 'Modo Escuro';
     });
 
-    // nova pesquisa
     btnSearch.addEventListener('click', () => {
       page = 1;
       seenUrls.clear();
@@ -196,25 +245,33 @@
       fetchNews();
     });
 
-    // continuar pesquisa
     btnLoadMore.addEventListener('click', () => {
+      if ((page * PAGE_SIZE) >= MAX_FETCHABLE) {
+        loadMoreContainer.style.display = 'none';
+        return;
+      }
       page++;
       fetchNews();
     });
 
     async function fetchNews() {
       spinner.classList.add('visible');
-      const endpoint =
-        `${BASE}/everything?q=tecnologia&language=pt&pageSize=${pageSize}` +
-        `&page=${page}&sortBy=publishedAt&apiKey=${API_KEY}`;
+      const endpoint = `${BASE}/everything`
+        + `?q=tecnologia`
+        + `&domains=${encodeURIComponent(TECHNOLOGY_DOMAINS)}`
+        + `&language=pt`
+        + `&pageSize=${PAGE_SIZE}`
+        + `&page=${page}`
+        + `&sortBy=publishedAt`
+        + `&apiKey=${API_KEY}`;
       const url = PROXY + encodeURIComponent(endpoint);
 
       try {
-        const res = await fetch(url);
+        const res  = await fetch(url);
         const data = await res.json();
 
         if (data.status !== 'ok') {
-          container.innerHTML += `<p>Erro ao buscar notícias.</p>`;
+          container.innerHTML += `<p>Erro ao buscar notícias: ${data.message || 'status não OK'}.</p>`;
           return;
         }
         if (page === 1 && data.articles.length === 0) {
@@ -222,50 +279,42 @@
           return;
         }
 
-        // filtra duplicados
         const unique = data.articles.filter(item => {
           if (!item.url || seenUrls.has(item.url)) return false;
           seenUrls.add(item.url);
           return true;
         });
 
-        // renderiza
         unique.forEach(item => {
           const title = item.title || item.description || 'Sem título';
-          const img = item.urlToImage ||
-            'https://via.placeholder.com/400x200?text=Sem+Imagem';
-          const card = document.createElement('article');
+          const img   = item.urlToImage || 'https://via.placeholder.com/400x200?text=Sem+Imagem';
+          const card  = document.createElement('article');
           card.className = 'card';
           card.innerHTML = `
             <img src="${img}" alt="Notícia"/>
             <div class="card-content">
-              <small>${new Date(item.publishedAt)
-                .toLocaleDateString('pt-BR')} • ${item.source.name}</small>
+              <small>${new Date(item.publishedAt).toLocaleDateString('pt-BR')} • ${item.source.name}</small>
               <h3>${title}</h3>
               <p>${item.description || ''}</p>
-              <a href="${item.url}" target="_blank">Ler mais →</a>
+              <a href="${item.url}" target="_blank">Acessar</a>
             </div>`;
           container.appendChild(card);
         });
 
-        // decide exibição do botão pelos totalResults
-        const total = data.totalResults || 0;
-        const fetched = page * pageSize;
-        loadMoreContainer.style.display =
-          (fetched < total) ? 'flex' : 'none';
+        const total    = data.totalResults || 0;
+        const available= Math.min(total, MAX_FETCHABLE);
+        const fetched  = page * PAGE_SIZE;
+        loadMoreContainer.style.display = (fetched < available) ? 'flex' : 'none';
 
       } catch (err) {
-        console.error(err);
-        container.innerHTML += `<p>Falha na requisição. Verifique o console.</p>`;
+        console.error('Fetch error:', err);
+        container.innerHTML += `<p>Falha na requisição: ${err.message}.</p>`;
       } finally {
         spinner.classList.remove('visible');
       }
     }
 
-    // limpa tudo ao recarregar
-    window.addEventListener('load', () => {
-      seenUrls.clear();
-    });
+    window.addEventListener('load', () => seenUrls.clear());
   </script>
 </body>
 </html>
